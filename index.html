@@ -7,28 +7,18 @@
     <link rel="stylesheet" href="styles/rockPaperScissors.css" />
   </head>
   <body>
-    <h1>Rock paper Scissors</h1>
-    <button
-      class="gameBtn"
-      onclick="
-    playGame('rock');
-    updateGameMoves()"
-    >
+    <h1>Rock Paper Scissors</h1>
+    <h1>
+      Choose your move by pressing the Buttons <br />
+      Or use 1, 2, 3 on your keyboard
+    </h1>
+    <button class="gameBtn js-rock-btn">
       <img src="images/rock-emoji.png" alt="" />
     </button>
-    <button
-      class="gameBtn"
-      onclick="
-    playGame('paper')"
-    >
+    <button class="gameBtn js-paper-btn">
       <img src="images/paper-emoji.png" alt="" />
     </button>
-    <button
-      class="gameBtn"
-      onclick="
-    playGame('scissors')
-        "
-    >
+    <button class="gameBtn js-scissors-btn">
       <img src="images/scissors-emoji.png" alt="" />
     </button>
 
@@ -36,17 +26,8 @@
     <p class="gameMovesString"></p>
     <p class="scoreString"></p>
 
-    <button
-      class="resetButton"
-      onclick="
-      score.wins = 0;
-      score.losses = 0;
-      score.ties = 0;
-      localStorage.removeItem('score');
-      updateScore();"
-    >
-      Reset Score
-    </button>
+    <button class="resetButton">Reset Score</button>
+    <button class="autoPlayButton">Auto play</button>
     <script src="scripts/rockPaperScissors.js"></script>
   </body>
 </html>

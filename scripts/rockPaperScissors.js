@@ -8,12 +8,42 @@ function updateScore() {
   document.querySelector(
     ".scoreString"
   ).innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
-
-  document.querySelector(".gameMovesString").innerHTML = ``;
-  document.querySelector(".resultString").innerHTML = ``;
 }
 
 updateScore();
+
+document.querySelector(".js-rock-btn").addEventListener("click", () => {
+  playGame("rock");
+});
+
+document.querySelector(".js-paper-btn").addEventListener("click", () => {
+  playGame("paper");
+});
+
+document.querySelector(".js-scissors-btn").addEventListener("click", () => {
+  playGame("scissors");
+});
+document.querySelector(".autoPlayButton").addEventListener("click", () => {
+  autoPlay();
+});
+document.querySelector(".resetButton").addEventListener("click", () => {
+  score.wins = 0;
+  score.losses = 0;
+  score.ties = 0;
+  localStorage.removeItem("score");
+  updateScore();
+});
+
+document.body.addEventListener("keydown", (e) => {
+  if (e.key === "1") {
+    playGame("rock");
+  } else if (e.key === "2") {
+    playGame("paper");
+  } else if (e.key === "3") {
+    playGame("scissors");
+  }
+});
+
 function playGame(playerMove) {
   const computerMove = pickComputerMove();
 
@@ -63,6 +93,24 @@ function playGame(playerMove) {
   ).innerHTML = `You <img src="images/${playerMove}-emoji.png" style="height: 70px" alt="" />
       <img src="images/${computerMove}-emoji.png" style="height: 70px" alt="" />
       Computer`;
+}
+
+let isAutoPlaying = false;
+let intervalId;
+
+function autoPlay() {
+  if (!isAutoPlaying) {
+    intervalId = setInterval(function () {
+      const playerMove = pickComputerMove();
+      playGame(playerMove);
+    }, 1000);
+    document.querySelector(".autoPlayButton").innerHTML = "Stop game";
+    isAutoPlaying = true;
+  } else {
+    clearInterval(intervalId);
+    document.querySelector(".autoPlayButton").innerHTML = "Auto play";
+    isAutoPlaying = false;
+  }
 }
 
 function pickComputerMove() {
